@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MassiveTextParserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-02-24T18:29:06" hostname="eukelade" time="188.994">
+  <properties/>
+  <testcase name="parse hamlet REPEAT_TIMES, correct word count" classname="MassiveTextParserTest" time="188.994"/>
+  <system-out><![CDATA[MassiveTextParserTest.parse hamlet REPEAT_TIMES, correct word count: [measured 10 out of 15 rounds, threads: 1 (sequential)]
+ round: 12.56 [+- 0.13], round.block: 0.00 [+- 0.00], round.gc: 0.00 [+- 0.00], GC.calls: 323, GC.time: 0.67, time.total: 188.99, time.warmup: 63.45, time.bench: 125.54
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
