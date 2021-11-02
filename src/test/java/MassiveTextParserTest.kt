@@ -1,11 +1,12 @@
 import com.carrotsearch.junitbenchmarks.BenchmarkRule
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
 import java.io.File
 
-private const val REPEAT_TIMES = 1000
+private const val REPEAT_TIMES = 500
 
 private val expectedResults = mapOf(
         "hamlet" to 100 * REPEAT_TIMES,
@@ -25,18 +26,26 @@ class MassiveTextParserTest {
     @get:Rule
     val temporaryFolder = TemporaryFolder()
 
-    @Test
-    fun `parse hamlet REPEAT_TIMES, correct word count`() {
-        temporaryFolder.create()
+    private lateinit var files: List<File>
 
+    @Before
+    fun setUp() {
+        temporaryFolder.create()
         val sourceFile =  File(javaClass.getResource("hamlet").toURI())
-        val files = List(REPEAT_TIMES) {
+        files = List(REPEAT_TIMES) {
             val targetFile = temporaryFolder.newFile("hamlet$it")
             sourceFile.copyTo(targetFile, overwrite = true)
-            targetFile.inputStream()
         }
+    }
 
-        val actualResults = subject.parse(files)
+    @After
+    fun tearDown() {
+        temporaryFolder.delete()
+    }
+
+    @Test
+    fun `parse hamlet REPEAT_TIMES, correct word count`() {
+        val actualResults = subject.parse(files.map { it.inputStream() })
 
         expectedResults.forEach { word, expectedCount ->
             val actualCount = actualResults[word] ?: 0
@@ -44,7 +53,5 @@ class MassiveTextParserTest {
                 "$word - expected:$expectedCount, actual:$actualCount"
             }
         }
-
-        temporaryFolder.delete()
     }
 }
