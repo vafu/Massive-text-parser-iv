@@ -1,5 +1,4 @@
 object MassiveTextParserFactory {
 
-    fun create(): MassiveTextParser =
-            SingleThreadedMassiveTextParser
+    fun create(): MassiveTextParser = null!!
 }

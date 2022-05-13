@@ -1,4 +1,3 @@
-import com.carrotsearch.junitbenchmarks.BenchmarkRule
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -6,7 +5,7 @@ import org.junit.Test
 import org.junit.rules.TemporaryFolder
 import java.io.File
 
-private const val REPEAT_TIMES = 500
+private const val REPEAT_TIMES = 2
 
 private val expectedResults = mapOf(
         "hamlet" to 100 * REPEAT_TIMES,
@@ -19,9 +18,6 @@ private val expectedResults = mapOf(
 class MassiveTextParserTest {
 
     private val subject = MassiveTextParserFactory.create()
-
-    @get:Rule
-    val benchmarkRule = BenchmarkRule()
 
     @get:Rule
     val temporaryFolder = TemporaryFolder()
